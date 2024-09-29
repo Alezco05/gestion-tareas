@@ -1,0 +1,47 @@
+<div class="container task-form-container">
+  <form [formGroup]="taskForm" (ngSubmit)="submitForm()">
+    <label for="title">Título de la Tarea:</label>
+    <input id="title" formControlName="title" type="text" />
+    <div *ngIf="taskForm.get('title')?.invalid && taskForm.get('title')?.touched" class="error-message">
+      El título es requerido y debe tener al menos 5 caracteres.
+    </div>
+
+    <label for="dueDate">Fecha Límite:</label>
+    <input id="dueDate" formControlName="dueDate" type="date" [min]="today" />
+    <div *ngIf="taskForm.get('dueDate')?.invalid && taskForm.get('dueDate')?.touched" class="error-message">
+      La fecha límite es requerida.
+    </div>
+
+    <label for="status">Estado:</label>
+    <div class="custom-select">
+      <select id="status" formControlName="status">
+        <option value="pending">Pendiente</option>
+        <option value="in-progress">En progreso</option>
+        <option value="completed">Completada</option>
+      </select>
+    </div>
+
+    <div *ngIf="(addedPeople$ | async) as addedPeople">
+      <div *ngIf="addedPeople.length > 0">
+        <h3 class="assigned-title">Personas Asignadas:</h3>
+        <div *ngFor="let person of addedPeople; let i = index" class="person-box">
+          <div class="person-details">
+            <strong>{{ person.fullName }}</strong> ({{ person.age }} años)
+            <ul>
+              <li *ngFor="let skill of person.skills">{{ skill }}</li>
+            </ul>
+          </div>
+          <button type="button" class="delete-btn" (click)="removePerson(i)">X</button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="showError" [ngClass]="{'hidden': !showError}" class="error-message">
+      El nombre ya está asociado a esta tarea. Por favor, elige otro nombre.
+    </div>
+    
+    <app-person-form (personAdded)="onPersonAdded($event)"></app-person-form>
+
+    <button type="submit" [disabled]="!(isFormValid$ | async)">Añadir Tarea</button>
+  </form>
+</div>

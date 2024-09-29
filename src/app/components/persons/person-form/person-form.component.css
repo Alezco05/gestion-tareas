@@ -1,0 +1,125 @@
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 16px;
+  background-color: rgba(240, 240, 240, 0.8);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(200, 200, 200, 0.5);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+input {
+  padding: 8px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: box-shadow 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.error-message {
+  color: red;
+  font-size: 0.875rem;
+  margin-bottom: 16px;
+}
+
+.skils-container {
+  border: 1px solid;
+  background-color: red;
+  padding: 5px;
+}
+
+.skill-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  width: 100%;
+  box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.skill-input input {
+  width: calc(100%);
+  max-width: 100%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-right: 0;
+  }
+}
+
+.skill-input button {
+  flex-shrink: 0;
+}
+
+button {
+  padding: 12px;
+  margin: 8px 0;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  width: 256px;
+  text-align: center;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  align-self: center;
+}
+
+button:hover {
+  background-color: #0056b3;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 600px;
+  }
+}
+
+.skills-container {
+  width: 100%;
+  padding: 1rem;
+  background-color: #9db3ff;
+  border-radius: 1rem;
+}
+
+.skills-container button {
+  width: 100%;
+  margin: 5px unset;
+}
+
+.button-delete {
+  background-color: red;
+}
+
+h3 {
+  margin-bottom: 20px;
+}

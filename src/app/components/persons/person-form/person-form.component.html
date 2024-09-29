@@ -1,0 +1,32 @@
+<div class="container form-container">
+  <form [formGroup]="personForm" (ngSubmit)="submitForm()">
+    <h3>Datos de la personas</h3>
+    <label for="fullName">Nombre Completo:</label>
+    <input id="fullName" formControlName="fullName" type="text" />
+    <div *ngIf="personForm.get('fullName')?.invalid && personForm.get('fullName')?.touched" class="error-message">
+      Nombre es requerido y debe tener al menos 5 caracteres.
+    </div>
+
+    <label for="age">Edad:</label>
+    <input id="age" formControlName="age" type="number" />
+    <div *ngIf="personForm.get('age')?.invalid && personForm.get('age')?.touched" class="error-message">
+      Edad es requerida (mayor a 18 y menor a 100).
+    </div>
+
+    <div class="skills-container">
+      <label>Habilidades:</label>
+      <div formArrayName="skills">
+        <div *ngFor="let skill of skills.controls; let i = index" class="skill-input">
+          <input [formControlName]="i" type="text" placeholder="Hablidad {{i + 1}}" />
+          <button type="button" class="button-delete" (click)="removeSkill(i)" [disabled]="skills.length === 1">Eliminar</button>
+        </div>
+        <button type="button" (click)="addSkill()">Añadir Habilidad</button>
+      </div>
+    </div>
+    
+
+   
+    <button type="submit" [disabled]="!isFormValid()">Añadir Persona</button>
+    
+  </form>
+</div>

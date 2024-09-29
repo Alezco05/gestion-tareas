@@ -1,0 +1,37 @@
+<div class="task-container">
+  <div class="task-list">
+    <div class="filter-container">
+      <label *ngFor="let filter of filters">
+        <input 
+          type="radio" 
+          name="status" 
+          [value]="filter.value" 
+          (change)="filterTasks(filter.value)" 
+          [checked]="selectedFilter === filter.value" 
+        />
+        {{ filter.label }}
+      </label>
+    </div>
+    
+    <h2>Lista de Tareas</h2>
+
+    <h3 *ngIf="(filteredTasks$ | async)?.length === 0" class="no-tasks-message">No hay tareas disponibles.</h3>
+
+    <div *ngFor="let task of filteredTasks$ | async" class="task-item">
+      <h3>{{ task.title }}</h3>
+      <p>Estado: {{ task.completed ? 'Completada' : task.inProgress ? 'En Proceso' : 'Pendiente' }}</p>
+      <p>Fecha Límite: {{ task.dueDate }}</p>
+      <p>Personas Asignadas:</p>
+      <ul class="assigned-people">
+        <li *ngFor="let person of task.assignedPeople">
+          {{ person.fullName }} ({{ person.age }}) - Habilidades: {{ person.skills.join(', ') }}
+        </li>
+      </ul>
+      <button *ngIf="!task.completed" (click)="completeTask(task.id)">Completar</button>
+    </div>
+  </div>
+
+  <div class="task-form">
+    <app-task-form></app-task-form>
+  </div>
+</div>
